@@ -1,0 +1,31 @@
+body {
+    /* font-family: 'Oswald', sans-serif; */
+    margin: 0;
+    padding: 0;
+    /* height: 5000px; */
+    background-color:  #ffd494;
+}
+
+.orange-background {
+    background-color: #ea842b;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+.navbar-brand:hover {
+    color: #3e3734c6;
+}
+
+.nav-link {
+    margin-left: 20px;
+    color: black;
+
+}
+
+.nav-link:hover {
+    color: #3e3734c6;
+}
