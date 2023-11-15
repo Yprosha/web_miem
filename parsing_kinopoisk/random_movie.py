@@ -18,4 +18,4 @@ def get_random_film():
 
 
 if __name__=='__main__':
-    print(get_random_film())
+    get_random_film()
