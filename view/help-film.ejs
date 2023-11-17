@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/help-film.css">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/footer.css">
+    <title>Помоги выбрать</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<!-- Навигационная панель -->
+
+<%- include('header.ejs') %>
+
+
+<!--  -->
+
+<main>
+    <section class="form-help">
+        <h2>Введите описание фильма:</h2>
+        <div class="text-content">
+            <form action="/api/movies/help" method="post">
+                <label for="message" hidden="hidden"></label>
+                <textarea name="message" id="message" cols="30" rows="10" placeholder="Это захватывающее кинематографическое произведение погружает зрителя в мир глубоких тайн и невероятных возможностей. Главный герой — опытный специалист по разгадыванию мозаичных загадок. Он вместе с командой специалистов по интригующей технике проникновения в сновидения, чтобы извлечь ценную информацию."></textarea>
+                <button type="submit">Подобрать</button>
+            </form>
+        </div>
+    </section>
+    <div class="result">
+        <div class="film">
+            <img src="https://kinopoiskapiunofficial.tech/images/posters/kp/447301.jpg" alt="Постер" class="film-img">
+            <div class="film-name">Начало</div>
+            <div class="film-rate">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(255,153,0);"><path d="M5.025 20.775A.998.998 0 0 0 6 22a1 1 0 0 0 .555-.168L12 18.202l5.445 3.63a1.001 1.001 0 0 0 1.517-1.106l-1.829-6.4 4.536-4.082a1 1 0 0 0-.59-1.74l-5.701-.454-2.467-5.461a.998.998 0 0 0-1.822-.001L8.622 8.05l-5.701.453a1 1 0 0 0-.619 1.713l4.214 4.107-1.491 6.452zM12 5.429l2.042 4.521.588.047h.001l3.972.315-3.271 2.944-.001.002-.463.416.171.597v.003l1.253 4.385L12 15.798V5.429z"></path></svg>
+                <span class="film-rate-num">8.8</span>
+            </div>
+            <a href="https://www.kinopoisk.ru/film/447301/" class="film-link">
+                <button type="button" class="film-btn">Смотреть</button>
+            </a>
+        </div>
+    </div>
+</main>
+
+<!--  -->
+
+<footer class="site-footer sticky-bottom">
+    <p class="text-content" style="color: white;">© 2023 Kino-help
+    </p>
+    <a href="#" class="text-content" style="color: white; font-size: 10px; text-decoration: none;">Проект МИЭМ
+    </a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="../js/help-film.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>
