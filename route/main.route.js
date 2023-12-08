@@ -12,4 +12,7 @@ router.get('/top-i', mainController.getTopI);
 router.get('/top-k', mainController.getTopK);
 router.get('/stat', mainController.getStat);
 
+router.get('/top-k/film/add', mainController.getAddFilm);
+router.get('/top-i/film/add', mainController.getAddFilmTOPI);
+
 module.exports = router;

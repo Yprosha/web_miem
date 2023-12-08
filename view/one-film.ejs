@@ -1,0 +1,26 @@
+<form class="modal-content add-film-container">
+    <img src="/images/close.png" alt="" class="btn-close">
+    <h2 class="name-modal">Просмотр фильма</h2>
+    <label for="place">Место:</label>
+    <input type="number" id="place" name="place" required value="<%= film.place %>">
+
+    <label for="name">Название:</label>
+    <input type="text" id="name" name="name" required value="<%= film.name %>">
+
+    <label for="photo_link">Ссылка на фото:</label>
+    <input type="text" id="photo_link" name="photo_link" value="<%= film.photo_link %>">
+
+    <label for="rate">Рейтинг:</label>
+    <input type="number" id="rate" name="rate" step="0.01" value="<%= film.rate %>">
+
+    <label for="film_link">Ссылка на фильм:</label>
+    <input type="text" id="film_link" name="film_link" value="<%= film.film_link %>">
+
+    <label for="description">Описание:</label>
+    <textarea id="description" name="description" rows="4" cols="50"><%= film.description %></textarea>
+
+    <button class="btn-change" data-id="<%= film.id %>">Сохранить изменения</button>
+    <button class="btn-delete" data-id="<%= film.id %>">Удалить фильм</button>
+
+</form>
+<div class="back"></div>

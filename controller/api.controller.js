@@ -2,6 +2,9 @@ const path = require('path');
 const ejs = require('ejs');
 const { exec } = require('child_process');
 
+const topkModel = require('../model/topk.model');
+const topiModel = require('../model/topi.model');
+
 
 class ApiController{
 
@@ -137,6 +140,175 @@ class ApiController{
                 res.status(500).json({ error: 'Ошибка парсинга JSON' });
             }
         });
+    }
+
+
+    async addFilmToTopK(req, res) {
+        try {
+            const { place, name, photo_link, rate, film_link, description } = req.body;
+
+            await topkModel.create(place, name, photo_link, rate, film_link, description);
+
+            res.status(200).json({ message: 'Фильм успешно добавлен в top-k!' });
+        } catch (error) {
+            console.error('Ошибка при добавлении фильма:', error);
+            res.status(500).json({ error: 'Произошла ошибка при обработке запроса' });
+        }
+
+    }
+
+
+    async addFilmToTopI(req, res) {
+        try {
+            const { place, name, photo_link, rate, film_link, description } = req.body;
+
+            await topiModel.create(place, name, photo_link, rate, film_link, description);
+
+            res.status(200).json({ message: 'Фильм успешно добавлен в top-i!' });
+        } catch (error) {
+            console.error('Ошибка при добавлении фильма:', error);
+            res.status(500).json({ error: 'Произошла ошибка при обработке запроса' });
+        }
+
+    }
+
+
+    async updateFilm(req, res) {
+        try {
+            const { id, place, name, photo_link, rate, film_link, description } = req.body;
+
+            await topkModel.update(id, place, name, photo_link, rate, film_link, description);
+
+            res.status(200).json({ message: 'Фильм успешно обновлен в top-k!' });
+        } catch (error) {
+            console.error('Ошибка при обновлении фильма:', error);
+            res.status(500).json({ error: 'Произошла ошибка при обработке запроса' });
+        }
+
+    }
+
+
+    async updateFilmTopI(req, res) {
+        try {
+            const { id, place, name, photo_link, rate, film_link, description } = req.body;
+
+            await topiModel.update(id, place, name, photo_link, rate, film_link, description);
+
+            res.status(200).json({ message: 'Фильм успешно обновлен в top-i!' });
+        } catch (error) {
+            console.error('Ошибка при обновлении фильма:', error);
+            res.status(500).json({ error: 'Произошла ошибка при обработке запроса' });
+        }
+
+    }
+
+
+    async deleteFilm(req, res) {
+        try {
+            const { id } = req.params;
+
+            await topkModel.delete(id);
+
+            res.status(200).json({ message: 'Фильм успешно удалён' });
+        } catch (error) {
+            console.error('Ошибка при удалении фильма:', error);
+            res.status(500).json({ error: 'Произошла ошибка при обработке запроса' });
+        }
+
+    }
+
+    async deleteFilmTopI(req, res) {
+        try {
+            const { id } = req.params;
+
+            await topiModel.delete(id);
+
+            res.status(200).json({ message: 'Фильм успешно удалён' });
+        } catch (error) {
+            console.error('Ошибка при удалении фильма:', error);
+            res.status(500).json({ error: 'Произошла ошибка при обработке запроса' });
+        }
+
+    }
+
+
+    async getPageFilm(req, res) {
+        try {
+            let page = req.query.page;
+            if (!page || page < 1) page = 1;
+            const pageSize = 10;
+            const offset = (page - 1) * pageSize;
+
+
+            const films = await topkModel.getAllFilm(pageSize, offset);
+
+            const template = path.join(__dirname, '..', 'view', 'page.ejs');
+            let html = await ejs.renderFile(template, { films, offset });
+
+            res.send(html);
+
+        } catch (error) {
+            console.error('Ошибка maaan4:', error);
+        }
+
+    }
+
+
+    async getPageFilmTopI(req, res) {
+        try {
+            let page = req.query.page;
+            if (!page || page < 1) page = 1;
+            const pageSize = 10;
+            const offset = (page - 1) * pageSize;
+
+
+            const films = await topiModel.getAllFilm(pageSize, offset);
+
+            const template = path.join(__dirname, '..', 'view', 'page.ejs');
+            let html = await ejs.renderFile(template, { films, offset });
+
+            res.send(html);
+
+        } catch (error) {
+            console.error('Ошибка maaan1:', error);
+        }
+
+    }
+
+
+    async getOneFilm(req, res) {
+        try {
+            let film_id = parseInt(req.query.film_id);
+
+            const film = await topkModel.getOneFilm(film_id);
+
+            const template = path.join(__dirname, '..', 'view', 'one-film.ejs');
+            let html = await ejs.renderFile(template, { film });
+
+            res.send(html);
+
+        } catch (error) {
+            console.error('Ошибка maaan2:', error);
+        }
+
+    }
+
+
+    async getOneFilmTopI(req, res) {
+        try {
+            let film_id = parseInt(req.query.film_id);
+
+            const film = await topiModel.getOneFilm(film_id);
+
+            const template = path.join(__dirname, '..', 'view', 'one-film.ejs');
+            let html = await ejs.renderFile(template, { film });
+
+            res.send(html);
+
+        } catch (error) {
+            console.error('Ошибка maaan3:', error);
+        }
+
     }
 
 }

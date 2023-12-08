@@ -22,4 +22,18 @@ router.post('/thankyou', apiController.postThankYou);
 router.get('/random', apiController.getFilmRandom);
 
 
+
+router.post('/top-k/film', apiController.addFilmToTopK);
+router.get('/top-k/film', apiController.getPageFilm);
+router.get('/top-k/one-film', apiController.getOneFilm);
+router.put('/top-k/film', apiController.updateFilm);
+router.delete('/top-k/film/:id', apiController.deleteFilm);
+
+router.post('/top-i/film', apiController.addFilmToTopI);
+router.get('/top-i/film', apiController.getPageFilmTopI);
+router.get('/top-i/one-film', apiController.getOneFilmTopI);
+router.put('/top-i/film', apiController.updateFilmTopI);
+router.delete('/top-i/film/:id', apiController.deleteFilmTopI);
+
+
 module.exports = router;

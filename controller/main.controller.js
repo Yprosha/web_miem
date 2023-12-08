@@ -48,20 +48,43 @@ class MainController{
 
     async getTopI(req, res) {
         const template = path.join(__dirname, '..', 'view', 'top-i.ejs');
-        let html = await ejs.renderFile(template);
+
+        let pageNumber = req.query.page;
+        if (!pageNumber || pageNumber < 1) pageNumber = 1;
+
+        let html = await ejs.renderFile(template, { pageNumber });
+
 
         res.send(html);
     }
 
     async getTopK(req, res) {
         const template = path.join(__dirname, '..', 'view', 'top-k.ejs');
-        let html = await ejs.renderFile(template);
+
+        let pageNumber = req.query.page;
+        if (!pageNumber || pageNumber < 1) pageNumber = 1;
+
+        let html = await ejs.renderFile(template, { pageNumber });
 
         res.send(html);
     }
 
     async getStat(req, res) {
         const template = path.join(__dirname, '..', 'view', 'stat.ejs');
+        let html = await ejs.renderFile(template);
+
+        res.send(html);
+    }
+
+    async getAddFilm(req, res) {
+        const template = path.join(__dirname, '..', 'view', 'add-film.ejs');
+        let html = await ejs.renderFile(template);
+
+        res.send(html);
+    }
+
+    async getAddFilmTOPI(req, res) {
+        const template = path.join(__dirname, '..', 'view', 'add-film.ejs');
         let html = await ejs.renderFile(template);
 
         res.send(html);
