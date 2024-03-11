@@ -58,7 +58,7 @@ class KinoHelper():
     
     def ger_rec(self, descr):
         
-        name = self.get_gpt_answer(descr)
+        name = 'Титаник'#self.get_gpt_answer(descr)
         return json.dumps(self.get_kp_film(name))
     
 
