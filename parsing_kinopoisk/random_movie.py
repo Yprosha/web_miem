@@ -1,10 +1,13 @@
 from kinopoisk_dev import KinopoiskDev
+import pandas as pd
 import json
 
 TOKEN = "VPRW6KG-FWDMFXR-QZZDK77-6KAZ6TP"
 kp = KinopoiskDev(token=TOKEN)
 
 def get_random_film():
+    df = pd.read_csv('parsing_kinopoisk/data.csv')
+    mov = df.sample().iloc[0]
     try:
         item = kp.random()
         movie = json.loads(item.json())
@@ -16,11 +19,11 @@ def get_random_film():
         }
     except:
         random_mov = {
-                    'url': f"https://www.kinopoisk.ru/film/{41519}/",
-                    'name': 'Брат',
-                    'poster': 'https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/18aa74db-68a3-4dda-a216-2ada3ee1e388/3840x'
+                    'url': mov['kp_url'],
+                    'name': mov['ru_name'],
+                    'poster': mov['poster']
         }
-    
+
     return json.dumps(random_mov)
 
 

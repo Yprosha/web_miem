@@ -89,7 +89,40 @@ class ApiController{
     async postMovieHelp(req, res) {
         const message = req.body.message;
         console.log('Полученное сообщение из формы:', message);
-        res.status(200).send('Данные успешно получены и обработаны.');
+
+        const pythonScriptPath = path.join(__dirname, '..', 'parsing_kinopoisk', 'gpt_movie_helper.py');
+
+        const command = `python ${pythonScriptPath} '${message}'`;
+
+        exec(command, (error, stdout, stderr) => {
+            if (error) {
+                console.error('Ошибка выполнения скрипта Python:', error);
+                res.status(500).json({ error: 'Ошибка выполнения скрипта Python' });
+                return;
+            }
+
+            if (stderr) {
+                console.error('Ошибка выполнения скрипта Python:', stderr);
+                res.status(500).json({ error: 'Ошибка выполнения скрипта Python' });
+                return;
+            }
+
+            try {
+                console.log(stdout);
+                const movieData = JSON.parse(stdout.trim());
+
+                const updatedFilmData = {
+                    photoPath: movieData.poster,
+                    filmName: movieData.name,
+                    filmLink: movieData.url
+                };
+
+                res.json(updatedFilmData);
+            } catch (parseError) {
+                console.error('Ошибка парсинга JSON:', parseError);
+                res.status(500).json({ error: 'Ошибка парсинга JSON' });
+            }
+        });
     }
 
     async postFeedback(req, res) {

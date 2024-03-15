@@ -20,7 +20,28 @@ form.addEventListener('submit', async function(event) {
     try {
         const response = await axios.post('/api/movies/help', { message });
         console.log(response.data);
+
+        const photoPath = response.data.photoPath;
+        const filmName = response.data.filmName;
+        const filmRate = (Math.random() * (3) + 7).toFixed(2);
+        const filmLink = response.data.filmLink;
+
+        updateFilmInfo(photoPath, filmName, filmRate, filmLink);
     } catch (error) {
         console.error('Ошибка отправки данных:', error);
     }
 });
+
+function updateFilmInfo(photoPath, filmName, filmRate, filmLink) {
+    const filmImg = document.querySelector('.film-img');
+    const filmNameElement = document.querySelector('.film-name');
+    const filmRateElement = document.querySelector('.film-rate-num');
+    const filmLinkElement = document.querySelector('.film-link');
+
+    filmImg.src = photoPath;
+    filmNameElement.textContent = filmName;
+    filmRateElement.textContent = filmRate;
+    filmLinkElement.href = filmLink;
+}
+
+

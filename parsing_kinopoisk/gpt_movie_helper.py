@@ -9,7 +9,7 @@ import json
 class KinoHelper():
     
     def __init__(self):
-        os.environ["OPENAI_API_KEY"] = "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"
+        os.environ["OPENAI_API_KEY"] = "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"
         self.TOKEN = "VPRW6KG-FWDMFXR-QZZDK77-6KAZ6TP"
         
         self.kp = KinopoiskDev(token=self.TOKEN)
@@ -58,7 +58,7 @@ class KinoHelper():
     
     def ger_rec(self, descr):
         
-        name = 'Титаник'#self.get_gpt_answer(descr)
+        name = self.get_gpt_answer(descr)
         return json.dumps(self.get_kp_film(name))
     
 
